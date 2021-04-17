@@ -8,12 +8,15 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    @IBOutlet var buttons: [UIButton]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        // set buttons style
+        for button in buttons {
+            button.layer.cornerRadius = 15
+        }
     }
-
-
 }
 
