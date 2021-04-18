@@ -23,6 +23,7 @@ class Task1ViewController: UIViewController {
     private lazy var newPriceList = [""]
     private lazy var percentageDifference = [""]
     private lazy var itemsDescription = [""]
+    private lazy var items: [Item] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +35,7 @@ class Task1ViewController: UIViewController {
         itemsDescription = self.createDescriptionsList(numberOfItems: 6)
         
         
-        let items = self.createItemsList(description: itemsDescription, image: images as! [UIImage], oldPrice: oldPriceList, newPrice: newPriceList, percentageDifference: percentageDifference)
+        items = self.createItemsList(description: itemsDescription, image: images as! [UIImage], oldPrice: oldPriceList, newPrice: newPriceList, percentageDifference: percentageDifference)
         print(items)
     }
     
@@ -125,5 +126,32 @@ class Task1ViewController: UIViewController {
         }
         
         return items
+    }
+}
+
+extension Task1ViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print(items.count)
+        return items.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let item = items[indexPath.row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CatalogItem", for: indexPath) as! Task1CollectionViewCell
+        cell.imageView.image = item.image
+        
+        let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: item.oldPrice)
+            attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 1, range: NSMakeRange(0, attributeString.length))
+        cell.labels[0].attributedText = attributeString
+        cell.labels[1].text = item.newPrice
+        cell.labels[2].text = item.percentageDifference
+        cell.labels[2].layer.cornerRadius = 5
+        cell.labels[2].layer.masksToBounds = true
+        cell.labels[3].text = item.description
+        
+        let size = self.view.bounds
+        cell.mainStackViewWidth.constant = (size.width - 45) / 2
+        
+        return cell
     }
 }

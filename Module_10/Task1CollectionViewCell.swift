@@ -18,9 +18,5 @@ class Task1CollectionViewCell: UICollectionViewCell {
      3 - description
      */
     @IBOutlet var labels: [UILabel]!
-    
-    
-    
-    
-    
+    @IBOutlet weak var mainStackViewWidth: NSLayoutConstraint!
 }
