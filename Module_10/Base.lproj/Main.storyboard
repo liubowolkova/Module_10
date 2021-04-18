@@ -23,13 +23,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="4sE-LZ-6uz">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4sE-LZ-6uz">
                                 <rect key="frame" x="165" y="371" width="84" height="154"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xRM-Jv-FkP">
-                                        <rect key="frame" x="0.0" y="0.0" width="84" height="48"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="84" height="46"/>
                                         <color key="backgroundColor" systemColor="systemYellowColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                         <state key="normal" title="Task 1">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -38,22 +38,25 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZSp-w8-Enq">
-                                        <rect key="frame" x="0.0" y="53" width="84" height="48"/>
+                                        <rect key="frame" x="0.0" y="54" width="84" height="46"/>
                                         <color key="backgroundColor" systemColor="systemYellowColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                         <state key="normal" title="Task 2">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O9M-82-oIi">
-                                        <rect key="frame" x="0.0" y="106" width="84" height="48"/>
+                                        <rect key="frame" x="0.0" y="108" width="84" height="46"/>
                                         <color key="backgroundColor" systemColor="systemYellowColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                         <state key="normal" title="Task 3">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="84" id="qaH-Ou-xER"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
