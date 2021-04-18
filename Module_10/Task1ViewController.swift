@@ -35,6 +35,7 @@ class Task1ViewController: UIViewController {
         
         
         let items = self.createItemsList(description: itemsDescription, image: images as! [UIImage], oldPrice: oldPriceList, newPrice: newPriceList, percentageDifference: percentageDifference)
+        print(items)
     }
     
     private func createImageStack(numberOfImages: Int) -> [UIImage]{
