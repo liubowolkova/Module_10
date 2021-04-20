@@ -250,7 +250,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="imageView" destination="osM-3m-K0a" id="hTi-Hy-6RT"/>
+                                            <outlet property="imageContainer" destination="osM-3m-K0a" id="uqn-fU-RqO"/>
                                             <outlet property="label" destination="dD4-Gu-Fwz" id="Dog-8Y-G7G"/>
                                         </connections>
                                     </tableViewCell>
