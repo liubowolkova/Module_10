@@ -10,6 +10,10 @@ import UIKit
 class Task2TableViewCell: UITableViewCell {
     @IBOutlet weak var imageContainer: UIImageView!
     @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var sideView: UIView!
+    @IBOutlet weak var chevronForvard: UIImageView!
+    @IBOutlet weak var propLabel: UILabel!
+    @IBOutlet weak var switchElement: UISwitch!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,5 +25,4 @@ class Task2TableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
 }
