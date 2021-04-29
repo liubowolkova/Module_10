@@ -27,6 +27,23 @@ class Task2ViewController: UIViewController {
         
         settingsItemList = self.generateSettingsItemList(names: names, icons: icons, colors: colors, propNames: propNames)
         
+        // Create table header
+        let tableSize = tableView.bounds
+        tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableSize.width, height: 60))
+        let titleX = tableSize.width / 2 - 113
+        let title = UILabel(frame: CGRect(x: titleX, y: 20, width: 150, height: 30))
+        title.text = "Настройки"
+        title.font = UIFont(name: "Helvetica", size: 28)
+        title.tintColor = .black
+        tableView.tableHeaderView!.addSubview(title)
+        
+        // Set title center into headerView
+        // Don't work
+        /*
+        title.centerXAnchor.constraint(equalTo: tableView.tableHeaderView!.centerXAnchor).isActive = true
+        title.centerYAnchor.constraint(equalTo: tableView.tableHeaderView!.centerYAnchor).isActive = true
+        */
+ 
         // Cut extra cells
         tableView.tableFooterView = UIView()
     }
@@ -62,6 +79,7 @@ extension Task2ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Creating cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell") as! Task2TableViewCell
+        
         // Customizing cell
         let currentItem = settingsItemList[indexPath.row]
         self.setSystemIconSettings(imageView: cell.imageContainer, icon: currentItem.icon, color: currentItem.color)
@@ -69,7 +87,7 @@ extension Task2ViewController: UITableViewDataSource {
         cell.chevronForvard.isHidden = currentItem.icon == "airplane"
         cell.propLabel.text = currentItem.propName
         cell.switchElement.isHidden = !(currentItem.icon == "airplane")
-        
+        cell.notification.isHidden = !(currentItem.icon == "gear")
         return cell
     }
 }

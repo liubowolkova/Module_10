@@ -243,17 +243,27 @@
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RlY-Q3-mQH">
                                                                     <rect key="frame" x="212" y="14.5" width="41.5" height="20.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <nil key="textColor"/>
+                                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="RZ3-Xb-LE2">
                                                                     <rect key="frame" x="163" y="9.5" width="51" height="31"/>
                                                                 </switch>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="1.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="uHE-gZ-9Ot">
+                                                                    <rect key="frame" x="133" y="10.5" width="30" height="29"/>
+                                                                    <color key="tintColor" systemColor="systemRedColor"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="30" id="FJL-QA-9de"/>
+                                                                        <constraint firstAttribute="height" constant="30" id="r1M-mE-056"/>
+                                                                    </constraints>
+                                                                </imageView>
                                                             </subviews>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             <constraints>
+                                                                <constraint firstItem="RZ3-Xb-LE2" firstAttribute="leading" secondItem="uHE-gZ-9Ot" secondAttribute="trailing" id="D69-kk-og0"/>
                                                                 <constraint firstItem="RZ3-Xb-LE2" firstAttribute="centerY" secondItem="hGr-GJ-Mce" secondAttribute="centerY" id="FgT-zs-DMB"/>
                                                                 <constraint firstItem="RlY-Q3-mQH" firstAttribute="centerY" secondItem="hGr-GJ-Mce" secondAttribute="centerY" id="WX8-2D-KgR"/>
+                                                                <constraint firstItem="uHE-gZ-9Ot" firstAttribute="centerY" secondItem="hGr-GJ-Mce" secondAttribute="centerY" id="Xfb-51-d99"/>
                                                                 <constraint firstItem="ann-EL-V4j" firstAttribute="centerY" secondItem="hGr-GJ-Mce" secondAttribute="centerY" id="a0M-D9-d4M"/>
                                                                 <constraint firstItem="ann-EL-V4j" firstAttribute="leading" secondItem="RlY-Q3-mQH" secondAttribute="trailing" constant="15" id="gAE-uR-x4v"/>
                                                                 <constraint firstAttribute="trailing" secondItem="ann-EL-V4j" secondAttribute="trailing" constant="15" id="rmr-GC-4WD"/>
@@ -277,6 +287,7 @@
                                             <outlet property="chevronForvard" destination="ann-EL-V4j" id="o0w-jx-0ed"/>
                                             <outlet property="imageContainer" destination="osM-3m-K0a" id="uqn-fU-RqO"/>
                                             <outlet property="label" destination="dD4-Gu-Fwz" id="Dog-8Y-G7G"/>
+                                            <outlet property="notification" destination="uHE-gZ-9Ot" id="0o7-PM-DEG"/>
                                             <outlet property="propLabel" destination="RlY-Q3-mQH" id="Gbe-2y-Jas"/>
                                             <outlet property="sideView" destination="hGr-GJ-Mce" id="cIc-fD-9RP"/>
                                             <outlet property="switchElement" destination="RZ3-Xb-LE2" id="gRM-pn-Xox"/>
@@ -308,6 +319,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="1.circle.fill" catalog="system" width="128" height="121"/>
         <image name="Pic_1" width="414" height="736"/>
         <image name="chevron.forward" catalog="system" width="96" height="128"/>
         <image name="pencil" catalog="system" width="128" height="113"/>

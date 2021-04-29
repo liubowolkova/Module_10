@@ -14,6 +14,7 @@ class Task2TableViewCell: UITableViewCell {
     @IBOutlet weak var chevronForvard: UIImageView!
     @IBOutlet weak var propLabel: UILabel!
     @IBOutlet weak var switchElement: UISwitch!
+    @IBOutlet weak var notification: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
