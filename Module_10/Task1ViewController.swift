@@ -103,7 +103,7 @@ class Task1ViewController: UIViewController {
         let secondIndex = Int.random(in: 0...2)
         let thirdIndex = Int.random(in: 0...2)
         
-        let description = "\(first[firstIndex]) \(second[secondIndex]) \(third[thirdIndex]))"
+        let description = "\(first[firstIndex]) \(second[secondIndex]) \(third[thirdIndex])"
         
         return description
     }
@@ -128,7 +128,7 @@ class Task1ViewController: UIViewController {
     }
 }
 
-extension Task1ViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+extension Task1ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print(items.count)
         return items.count

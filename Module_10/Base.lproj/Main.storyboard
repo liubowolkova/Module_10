@@ -283,6 +283,7 @@
                                                 <constraint firstItem="Ttg-pg-KhF" firstAttribute="top" secondItem="KRB-TR-u73" secondAttribute="top" id="oqa-gr-z7j"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="60" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
                                             <outlet property="chevronForvard" destination="ann-EL-V4j" id="o0w-jx-0ed"/>
                                             <outlet property="imageContainer" destination="osM-3m-K0a" id="uqn-fU-RqO"/>
