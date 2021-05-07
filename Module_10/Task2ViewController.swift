@@ -87,20 +87,17 @@ class Task2ViewController: UIViewController {
         // Create table header
         let tableSize = tableView.bounds
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableSize.width, height: 60))
-        //let titleX = tableSize.width / 2
-        let titleX = 10
-        let title = UILabel(frame: CGRect(x: titleX, y: 20, width: 150, height: 30))
+        
+        let title = UILabel()
         title.text = "Настройки"
         title.font = UIFont(name: "Helvetica", size: 28)
         title.tintColor = .black
         tableView.tableHeaderView!.addSubview(title)
         
         // Set title center into headerView
-        // Don't work
-        /*
+        title.translatesAutoresizingMaskIntoConstraints = false
         title.centerXAnchor.constraint(equalTo: tableView.tableHeaderView!.centerXAnchor).isActive = true
         title.centerYAnchor.constraint(equalTo: tableView.tableHeaderView!.centerYAnchor).isActive = true
-        */
  
         // Cut extra cells
         tableView.tableFooterView = UIView()

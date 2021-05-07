@@ -55,6 +55,9 @@
                                         <state key="normal" title="Task 3">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="VOw-S2-kEs" kind="show" id="LXU-Fp-5dR"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -80,6 +83,38 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-23" y="61"/>
+        </scene>
+        <!--Task3 View Controller-->
+        <scene sceneID="Z1d-4n-Ged">
+            <objects>
+                <viewController id="VOw-S2-kEs" customClass="Task3ViewController" customModule="Module_10" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="O98-gK-O1M">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ReB-oc-MQ9">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                                <viewLayoutGuide key="contentLayoutGuide" id="WgP-2v-vSf"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="wIG-mR-tGF"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="dRl-D8-HWO"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ReB-oc-MQ9" firstAttribute="leading" secondItem="dRl-D8-HWO" secondAttribute="leading" id="2sJ-Ym-kWr"/>
+                            <constraint firstAttribute="bottom" secondItem="ReB-oc-MQ9" secondAttribute="bottom" id="6z6-Ii-7Mf"/>
+                            <constraint firstItem="ReB-oc-MQ9" firstAttribute="trailing" secondItem="dRl-D8-HWO" secondAttribute="trailing" id="CED-X5-maP"/>
+                            <constraint firstItem="ReB-oc-MQ9" firstAttribute="top" secondItem="dRl-D8-HWO" secondAttribute="top" id="iAi-Zm-Mdo"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="RPh-f5-r57"/>
+                    <connections>
+                        <outlet property="scrollView" destination="ReB-oc-MQ9" id="ZSy-Sa-Eh3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hNb-7E-3BH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="660.86956521739137" y="751.33928571428567"/>
         </scene>
         <!--Task1 View Controller-->
         <scene sceneID="bGT-ml-bhv">

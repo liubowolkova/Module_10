@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		528A58C0263F05A20010A87C /* Task3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528A58BF263F05A20010A87C /* Task3ViewController.swift */; };
 		52D19ADF262C44D100D3AD10 /* Task1CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D19ADE262C44D100D3AD10 /* Task1CollectionViewCell.swift */; };
 		52D19AE2262C451800D3AD10 /* Task1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D19AE1262C451800D3AD10 /* Task1ViewController.swift */; };
 		52E81B36262DB46B00FA3B1B /* Task2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E81B35262DB46B00FA3B1B /* Task2ViewController.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		528A58BF263F05A20010A87C /* Task3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task3ViewController.swift; sourceTree = "<group>"; };
 		52D19ADE262C44D100D3AD10 /* Task1CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task1CollectionViewCell.swift; sourceTree = "<group>"; };
 		52D19AE1262C451800D3AD10 /* Task1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task1ViewController.swift; sourceTree = "<group>"; };
 		52E81B35262DB46B00FA3B1B /* Task2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task2ViewController.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				52EB8EEB262ACBB6008A2FF6 /* SceneDelegate.swift */,
 				52EB8EED262ACBB6008A2FF6 /* ViewController.swift */,
 				52EB8EEF262ACBB6008A2FF6 /* Main.storyboard */,
+				528A58BF263F05A20010A87C /* Task3ViewController.swift */,
 				52E81B35262DB46B00FA3B1B /* Task2ViewController.swift */,
 				52E81B38262DB49200FA3B1B /* Task2TableViewCell.swift */,
 				52D19ADE262C44D100D3AD10 /* Task1CollectionViewCell.swift */,
@@ -152,6 +155,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52E81B36262DB46B00FA3B1B /* Task2ViewController.swift in Sources */,
+				528A58C0263F05A20010A87C /* Task3ViewController.swift in Sources */,
 				52EB8EEE262ACBB6008A2FF6 /* ViewController.swift in Sources */,
 				52EB8EEA262ACBB6008A2FF6 /* AppDelegate.swift in Sources */,
 				52D19AE2262C451800D3AD10 /* Task1ViewController.swift in Sources */,
