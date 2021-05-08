@@ -5,8 +5,8 @@
 //  Created by Любовь Волкова on 02.05.2021.
 //
 
-import MapKit
 import UIKit
+import MapKit
 
 enum LabelTypes {
     case title, subtitle, p, span, nums
@@ -49,7 +49,7 @@ class Task3ViewController: UIViewController {
         let pText = "What do you need for making interesting gradient? All you need is Figma and Imagination!"
         let p = createLabel(name: pText, type: .p)
         let menuButton = createButton(title: "Menu", type: .bordered)
-        //let map = MKMapView()
+        let map = createMap()
         let spanText = "Creating gradient is free. You can pay 1$ if you really want waste some money"
         let span = createLabel(name: spanText, type: .span)
         let makeButton = createButton(title: "Make gradient", type: .fill)
@@ -58,20 +58,21 @@ class Task3ViewController: UIViewController {
         infoContainer.addArrangedSubview(subtitle)
         infoContainer.addArrangedSubview(p)
         infoContainer.addArrangedSubview(menuButton)
-        //infoContainer.addArrangedSubview(map)
+        infoContainer.addArrangedSubview(map)
         infoContainer.addArrangedSubview(span)
         infoContainer.addArrangedSubview(makeButton)
         infoContainer.addArrangedSubview(getButton)
         setButtonAnchors(button: menuButton, size: .m, align: .center, superView: infoContainer)
         setButtonAnchors(button: makeButton, size: .l, align: .fill, superView: infoContainer)
         setButtonAnchors(button: getButton, size: .m, align: .fill, superView: infoContainer)
+        setMapAnchors(map: map, superView: infoContainer)
         scrollView.addSubview(infoContainer)
         setInfoContainerAnchors(container: infoContainer, superView: scrollView, topView: imageContainer)
         
 //        let imageContainerHeight = imageContainer.bounds.size.height
 //        let infoContainerHeight = infoContainer.bounds.size.height
 //        scrollView.contentSize = CGSize(width: frameSize.width, height: imageContainerHeight + infoContainerHeight + 10)
-        scrollView.contentSize = CGSize(width: frameSize.width, height: frameSize.height)
+        scrollView.contentSize = CGSize(width: frameSize.width, height: 1500)
     }
     
     private func createImageContainer(image: UIImage) -> UIImageView {
@@ -227,6 +228,22 @@ class Task3ViewController: UIViewController {
         
         let multiplier: CGFloat = align == .center ? 0.9 : 1
         button.widthAnchor.constraint(equalTo: superView.widthAnchor, multiplier: multiplier).isActive = true
+    }
+    
+    private func createMap() -> MKMapView {
+        let map = MKMapView()
+        map.mapType = .standard
+        map.isZoomEnabled = false
+        map.isScrollEnabled = false
+        map.layer.cornerRadius = 10
+        map.layer.masksToBounds = true
+        
+        let location = CLLocation(latitude: 55.751244, longitude: 37.618423)
+        let regionRadius: CLLocationDistance = 1000
+        let coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+        map.setRegion(coordinateRegion, animated: true)
+        
+        return map
     }
     
     private func setMapAnchors(map: MKMapView, superView: UIView) {
