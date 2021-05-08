@@ -5,6 +5,7 @@
 //  Created by Любовь Волкова on 02.05.2021.
 //
 
+import MapKit
 import UIKit
 
 enum LabelTypes {
@@ -19,13 +20,17 @@ enum ButtonSize {
     case m, l
 }
 
+enum ButtonAlign {
+    case fill, center
+}
+
 class Task3ViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     private lazy var mainImage = UIImage(named: "Pic_1.png")
     private lazy var frameSize = view.frame.size
     
     //Basic containers
-    private lazy var mainImageContainer = createImageContainer(image: mainImage!)
+    private lazy var imageContainer = createImageContainer(image: mainImage!)
     private lazy var infoContainer = createInfoContainer()
     
     private lazy var imageSlider = createImageSlider(count: 5)
@@ -34,18 +39,38 @@ class Task3ViewController: UIViewController {
         super.viewDidLoad()
         
         let sliderStack = createSliderStack(views: imageSlider)
-        mainImageContainer.addSubview(sliderStack)
-        setSliderStackAnchors(stack: sliderStack, superView: mainImageContainer)
-        scrollView.addSubview(mainImageContainer)
-        setImageContainerAnchors(container: mainImageContainer, superView: scrollView)
+        imageContainer.addSubview(sliderStack)
+        setSliderStackAnchors(stack: sliderStack, superView: imageContainer)
+        scrollView.addSubview(imageContainer)
+        setImageContainerAnchors(container: imageContainer, superView: scrollView)
         
         let title = createLabel(name: "Fantastic gradient", type: .title)
         let subtitle = createLabel(name: "Some images", type: .subtitle)
+        let pText = "What do you need for making interesting gradient? All you need is Figma and Imagination!"
+        let p = createLabel(name: pText, type: .p)
+        let menuButton = createButton(title: "Menu", type: .bordered)
+        //let map = MKMapView()
+        let spanText = "Creating gradient is free. You can pay 1$ if you really want waste some money"
+        let span = createLabel(name: spanText, type: .span)
+        let makeButton = createButton(title: "Make gradient", type: .fill)
+        let getButton = createButton(title: "Get button", type: .bordered)
         infoContainer.addArrangedSubview(title)
         infoContainer.addArrangedSubview(subtitle)
+        infoContainer.addArrangedSubview(p)
+        infoContainer.addArrangedSubview(menuButton)
+        //infoContainer.addArrangedSubview(map)
+        infoContainer.addArrangedSubview(span)
+        infoContainer.addArrangedSubview(makeButton)
+        infoContainer.addArrangedSubview(getButton)
+        setButtonAnchors(button: menuButton, size: .m, align: .center, superView: infoContainer)
+        setButtonAnchors(button: makeButton, size: .l, align: .fill, superView: infoContainer)
+        setButtonAnchors(button: getButton, size: .m, align: .fill, superView: infoContainer)
         scrollView.addSubview(infoContainer)
-        setInfoContainerAnchors(container: infoContainer, superView: scrollView, topView: mainImageContainer)
+        setInfoContainerAnchors(container: infoContainer, superView: scrollView, topView: imageContainer)
         
+//        let imageContainerHeight = imageContainer.bounds.size.height
+//        let infoContainerHeight = infoContainer.bounds.size.height
+//        scrollView.contentSize = CGSize(width: frameSize.width, height: imageContainerHeight + infoContainerHeight + 10)
         scrollView.contentSize = CGSize(width: frameSize.width, height: frameSize.height)
     }
     
@@ -106,52 +131,62 @@ class Task3ViewController: UIViewController {
         infoView.axis = .vertical
         infoView.alignment = .center
         infoView.distribution = .fillProportionally
-        infoView.spacing = 20
+        infoView.spacing = 10
+        infoView.layer.cornerRadius = 10
+        infoView.layer.masksToBounds = true
         
-        infoView.backgroundColor = .red
+        // infoView.backgroundColor = .red
         
         return infoView
     }
     
     private func setInfoContainerAnchors(container: UIStackView, superView: UIView, topView: UIView) {
         container.translatesAutoresizingMaskIntoConstraints = false
-        container.topAnchor.constraint(equalTo: topView.bottomAnchor).isActive = true
-        container.leftAnchor.constraint(equalTo: superView.leftAnchor).isActive = true
-        container.widthAnchor.constraint(equalToConstant: frameSize.width).isActive = true
+        container.topAnchor.constraint(equalTo: topView.bottomAnchor, constant: -10).isActive = true
+        container.leftAnchor.constraint(equalTo: superView.leftAnchor, constant: 15).isActive = true
+        container.widthAnchor.constraint(equalToConstant: frameSize.width - 30).isActive = true
     }
     
     private func createLabel(name: String, type: LabelTypes) -> UILabel {
         let label = UILabel()
         label.text = name
+        label.numberOfLines = 0
         var fontName: String
         var fontSize: CGFloat
         var color: UIColor
+        var aligment: NSTextAlignment
         
         switch type {
         case .title:
             fontName = "Thonburi-Bold"
             fontSize = 26
             color = .black
+            aligment = .center
         case .subtitle:
             fontName = "HelveticaNeue"
             fontSize = 20
             color = .gray
+            aligment = .center
         case .p:
             fontName = "HelveticaNeue"
             fontSize = 18
             color = .black
+            aligment = .left
         case .span:
             fontName = "HelveticaNeue"
             fontSize = 16
             color = .lightGray
+            aligment = .center
         case .nums:
             fontName = "Thonburi-Bold"
             fontSize = 22
             color = .black
+            aligment = .center
         }
         
         label.font = UIFont(name: fontName, size: fontSize)
-        label.tintColor = color
+        label.textColor = color
+        label.textAlignment = aligment
         
         return label
     }
@@ -165,27 +200,38 @@ class Task3ViewController: UIViewController {
         return iconContainer
     }
     
-    private func createButton(name: String, type: ButtonTypes, size: ButtonSize) -> UIButton {
+    private func createButton(title: String, type: ButtonTypes) -> UIButton {
         let button = UIButton()
         button.layer.borderWidth = 2
         button.layer.borderColor = CGColor(red: 0, green: 0, blue: 1, alpha: 1)
-        // button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 10
+        button.setTitle(title, for: .normal)
         
         switch type {
         case .fill:
             button.backgroundColor = .blue
-            button.tintColor = .white
-            //button.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        case .bordered where size == .m:
+            button.setTitleColor(.white, for: .normal)
+        case .bordered:
             button.backgroundColor = .none
-            button.tintColor = .blue
-            //button.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        default:
-            button.backgroundColor = .blue
-            button.tintColor = .white
-            //button.heightAnchor.constraint(equalToConstant: 70).isActive = true
+            button.setTitleColor(.blue, for: .normal)
         }
         
         return button
+    }
+    
+    private func setButtonAnchors(button: UIButton, size: ButtonSize, align: ButtonAlign, superView: UIView) {
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        let height: CGFloat = size == .m ? 60 : 70
+        button.heightAnchor.constraint(equalToConstant: height).isActive = true
+        
+        let multiplier: CGFloat = align == .center ? 0.9 : 1
+        button.widthAnchor.constraint(equalTo: superView.widthAnchor, multiplier: multiplier).isActive = true
+    }
+    
+    private func setMapAnchors(map: MKMapView, superView: UIView) {
+        map.translatesAutoresizingMaskIntoConstraints = false
+        map.widthAnchor.constraint(equalTo: superView.widthAnchor).isActive = true
+        map.heightAnchor.constraint(equalToConstant: 200).isActive = true
     }
 }
