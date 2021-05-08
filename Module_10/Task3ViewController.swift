@@ -24,38 +24,44 @@ class Task3ViewController: UIViewController {
     private lazy var mainImage = UIImage(named: "Pic_1.png")
     private lazy var frameSize = view.frame.size
     
+    //Basic containers
+    private lazy var mainImageContainer = createImageContainer(image: mainImage!)
+    private lazy var infoContainer = createInfoContainer()
+    
+    private lazy var imageSlider = createImageSlider(count: 5)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Container for image and slider
-        let mainImageContainer = createImageContainer(image: mainImage!, width: frameSize.width, height: frameSize.width * 2 / 3)
-        
-        // Image slider
-        let imageSlider = createImageSlider(count: 5)
-        let sliderStack = createSliderStackWithinView(subviews: imageSlider, superView: mainImageContainer)
-        
-        // Main information container
-        let infoContainer = createInfoContainer()
-        infoContainer.translatesAutoresizingMaskIntoConstraints = false
-        infoContainer.widthAnchor.constraint(equalToConstant: frameSize.width).isActive = true
-        
+        let sliderStack = createSliderStack(views: imageSlider)
+        mainImageContainer.addSubview(sliderStack)
+        setSliderStackAnchors(stack: sliderStack, superView: mainImageContainer)
+        scrollView.addSubview(mainImageContainer)
+        setImageContainerAnchors(container: mainImageContainer, superView: scrollView)
         
         let title = createLabel(name: "Fantastic gradient", type: .title)
-        let subtitile = createLabel(name: "Some pictures", type: .subtitle)
-        
+        let subtitle = createLabel(name: "Some images", type: .subtitle)
         infoContainer.addArrangedSubview(title)
-        infoContainer.addArrangedSubview(subtitile)
-        
-        scrollView.addSubview(mainImageContainer)
+        infoContainer.addArrangedSubview(subtitle)
         scrollView.addSubview(infoContainer)
-        scrollView.contentSize = CGSize(width: frameSize.width, height: frameSize.width)
+        setInfoContainerAnchors(container: infoContainer, superView: scrollView, topView: mainImageContainer)
+        
+        scrollView.contentSize = CGSize(width: frameSize.width, height: frameSize.height)
     }
     
-    private func createImageContainer(image: UIImage, width: CGFloat, height: CGFloat) -> UIImageView {
-        let container = UIImageView(frame: CGRect(x: 0, y: 0, width: width, height: height))
+    private func createImageContainer(image: UIImage) -> UIImageView {
+        let container = UIImageView()
         container.image = image
         
         return container
+    }
+    
+    private func setImageContainerAnchors(container: UIImageView, superView: UIView) {
+        container.translatesAutoresizingMaskIntoConstraints = false
+        container.topAnchor.constraint(equalTo: superView.topAnchor).isActive = true
+        container.leftAnchor.constraint(equalTo: superView.leftAnchor).isActive = true
+        container.widthAnchor.constraint(equalToConstant: frameSize.width).isActive = true
+        container.heightAnchor.constraint(equalToConstant: frameSize.width / 3 * 2).isActive = true
     }
     
     private func createImageSlider(count: UInt) -> [UIView] {
@@ -77,24 +83,24 @@ class Task3ViewController: UIViewController {
         return sliders
     }
     
-    private func createSliderStackWithinView(subviews: [UIView], superView: UIView) -> UIStackView {
-        let stack = UIStackView(arrangedSubviews: subviews)
+    private func createSliderStack(views: [UIView]) -> UIStackView {
+        let stack = UIStackView(arrangedSubviews: views)
         stack.axis = .horizontal
         stack.alignment = .fill
         stack.distribution = .fillEqually
         stack.spacing = 10
         
-        superView.addSubview(stack)
-        
+        return stack
+    }
+    
+    private func setSliderStackAnchors(stack: UIStackView, superView: UIView) {
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.centerXAnchor.constraint(equalTo: superView.centerXAnchor).isActive = true
         stack.bottomAnchor.constraint(equalTo: superView.bottomAnchor, constant: -20).isActive = true
         stack.widthAnchor.constraint(equalToConstant: 90).isActive = true
         stack.heightAnchor.constraint(equalToConstant: 10).isActive = true
-        
-        return stack
     }
-    
+        
     private func createInfoContainer() -> UIStackView {
         let infoView = UIStackView()
         infoView.axis = .vertical
@@ -105,6 +111,13 @@ class Task3ViewController: UIViewController {
         infoView.backgroundColor = .red
         
         return infoView
+    }
+    
+    private func setInfoContainerAnchors(container: UIStackView, superView: UIView, topView: UIView) {
+        container.translatesAutoresizingMaskIntoConstraints = false
+        container.topAnchor.constraint(equalTo: topView.bottomAnchor).isActive = true
+        container.leftAnchor.constraint(equalTo: superView.leftAnchor).isActive = true
+        container.widthAnchor.constraint(equalToConstant: frameSize.width).isActive = true
     }
     
     private func createLabel(name: String, type: LabelTypes) -> UILabel {
@@ -156,21 +169,21 @@ class Task3ViewController: UIViewController {
         let button = UIButton()
         button.layer.borderWidth = 2
         button.layer.borderColor = CGColor(red: 0, green: 0, blue: 1, alpha: 1)
-        button.translatesAutoresizingMaskIntoConstraints = false
+        // button.translatesAutoresizingMaskIntoConstraints = false
         
         switch type {
         case .fill:
             button.backgroundColor = .blue
             button.tintColor = .white
-            button.heightAnchor.constraint(equalToConstant: 60).isActive = true
+            //button.heightAnchor.constraint(equalToConstant: 60).isActive = true
         case .bordered where size == .m:
             button.backgroundColor = .none
             button.tintColor = .blue
-            button.heightAnchor.constraint(equalToConstant: 60).isActive = true
+            //button.heightAnchor.constraint(equalToConstant: 60).isActive = true
         default:
             button.backgroundColor = .blue
             button.tintColor = .white
-            button.heightAnchor.constraint(equalToConstant: 70).isActive = true
+            //button.heightAnchor.constraint(equalToConstant: 70).isActive = true
         }
         
         return button
