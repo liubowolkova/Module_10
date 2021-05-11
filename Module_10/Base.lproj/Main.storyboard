@@ -24,10 +24,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4sE-LZ-6uz">
-                                <rect key="frame" x="165" y="371" width="84" height="154"/>
+                                <rect key="frame" x="152" y="344" width="110" height="208"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xRM-Jv-FkP">
-                                        <rect key="frame" x="0.0" y="0.0" width="84" height="46"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="110" height="46"/>
                                         <color key="backgroundColor" systemColor="systemYellowColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                         <state key="normal" title="Task 1">
@@ -38,7 +38,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZSp-w8-Enq">
-                                        <rect key="frame" x="0.0" y="54" width="84" height="46"/>
+                                        <rect key="frame" x="0.0" y="54" width="110" height="46"/>
                                         <color key="backgroundColor" systemColor="systemYellowColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                         <state key="normal" title="Task 2">
@@ -49,7 +49,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O9M-82-oIi">
-                                        <rect key="frame" x="0.0" y="108" width="84" height="46"/>
+                                        <rect key="frame" x="0.0" y="108" width="110" height="46"/>
                                         <color key="backgroundColor" systemColor="systemYellowColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                         <state key="normal" title="Task 3">
@@ -59,9 +59,20 @@
                                             <segue destination="VOw-S2-kEs" kind="show" id="LXU-Fp-5dR"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vd4-oe-XPe">
+                                        <rect key="frame" x="0.0" y="162" width="110" height="46"/>
+                                        <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <state key="normal" title="Task 3.1">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="M6m-hl-pHa" kind="show" id="fSa-IB-xbu"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="84" id="qaH-Ou-xER"/>
+                                    <constraint firstAttribute="width" constant="110" id="qaH-Ou-xER"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -115,6 +126,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hNb-7E-3BH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="660.86956521739137" y="751.33928571428567"/>
+        </scene>
+        <!--Task31 View Controller-->
+        <scene sceneID="CG0-Oy-8Wk">
+            <objects>
+                <viewController id="M6m-hl-pHa" customClass="Task3_1ViewController" customModule="Module_10" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WlI-bQ-qYC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="XqE-ys-lKF"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Zim-TQ-2WY"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CG6-ha-b7d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1403" y="751"/>
         </scene>
         <!--Task1 View Controller-->
         <scene sceneID="bGT-ml-bhv">

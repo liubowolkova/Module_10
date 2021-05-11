@@ -9,7 +9,7 @@ import UIKit
 import MapKit
 
 enum LabelTypes {
-    case title, subtitle, p, span, nums
+    case title, subtitle, p, span, sale, nums
 }
 
 enum ButtonTypes {
@@ -46,6 +46,26 @@ class Task3ViewController: UIViewController {
         
         let title = createLabel(name: "Fantastic gradient", type: .title)
         let subtitle = createLabel(name: "Some images", type: .subtitle)
+        
+        let saleView = UIView()
+        let saleInfo = createLabel(name: "Sale", type: .sale)
+        let saleSize = createLabel(name: "20%", type: .nums)
+        let starsCount = createLabel(name: "5.0", type: .nums)
+        let priceIcon = createIcon(name: "dollarsign.square", color: .green)
+        let starIcon = createIcon(name: "star.fill", color: .yellow)
+        let lineHolderView = UIView()
+        let line = UIView()
+        line.backgroundColor = .lightGray
+        lineHolderView.addSubview(line)
+        setLineAnchors(line: line, superView: lineHolderView)
+        saleView.addSubview(priceIcon)
+        saleView.addSubview(saleInfo)
+        saleView.addSubview(saleSize)
+        saleView.addSubview(lineHolderView)
+        saleView.addSubview(starIcon)
+        saleView.addSubview(starsCount)
+        setInnerSaleViewAnchors(iconPrice: priceIcon, saleLabel: saleInfo, saleSize: saleSize, lineView: lineHolderView, starIcon: starIcon, starsCount: starsCount, superView: saleView)
+        
         let pText = "What do you need for making interesting gradient? All you need is Figma and Imagination!"
         let p = createLabel(name: pText, type: .p)
         let menuButton = createButton(title: "Menu", type: .bordered)
@@ -54,14 +74,17 @@ class Task3ViewController: UIViewController {
         let span = createLabel(name: spanText, type: .span)
         let makeButton = createButton(title: "Make gradient", type: .fill)
         let getButton = createButton(title: "Get button", type: .bordered)
+        
         infoContainer.addArrangedSubview(title)
         infoContainer.addArrangedSubview(subtitle)
+        infoContainer.addArrangedSubview(saleView)
         infoContainer.addArrangedSubview(p)
         infoContainer.addArrangedSubview(menuButton)
         infoContainer.addArrangedSubview(map)
         infoContainer.addArrangedSubview(span)
         infoContainer.addArrangedSubview(makeButton)
         infoContainer.addArrangedSubview(getButton)
+        setSaleViewAnchors(view: saleView, superView: infoContainer)
         setButtonAnchors(button: menuButton, size: .m, align: .center, superView: infoContainer)
         setButtonAnchors(button: makeButton, size: .l, align: .fill, superView: infoContainer)
         setButtonAnchors(button: getButton, size: .m, align: .fill, superView: infoContainer)
@@ -151,7 +174,7 @@ class Task3ViewController: UIViewController {
     private func createLabel(name: String, type: LabelTypes) -> UILabel {
         let label = UILabel()
         label.text = name
-        label.numberOfLines = 0
+        // label.numberOfLines = 0
         var fontName: String
         var fontSize: CGFloat
         var color: UIColor
@@ -178,11 +201,16 @@ class Task3ViewController: UIViewController {
             fontSize = 16
             color = .lightGray
             aligment = .center
+        case .sale:
+            fontName = "HelveticaNeue"
+            fontSize = 19
+            color = .black
+            aligment = .left
         case .nums:
             fontName = "Thonburi-Bold"
             fontSize = 22
             color = .black
-            aligment = .center
+            aligment = .left
         }
         
         label.font = UIFont(name: fontName, size: fontSize)
@@ -249,6 +277,47 @@ class Task3ViewController: UIViewController {
     private func setMapAnchors(map: MKMapView, superView: UIView) {
         map.translatesAutoresizingMaskIntoConstraints = false
         map.widthAnchor.constraint(equalTo: superView.widthAnchor).isActive = true
-        map.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        map.heightAnchor.constraint(equalTo: map.widthAnchor, multiplier: 0.5).isActive = true
+    }
+    
+    private func setSaleViewAnchors(view: UIView, superView: UIView) {
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.widthAnchor.constraint(equalTo: superView.widthAnchor).isActive = true
+        view.heightAnchor.constraint(equalToConstant: 60).isActive = true
+    }
+    
+    private func setLineAnchors(line: UIView, superView: UIView) {
+        line.translatesAutoresizingMaskIntoConstraints = false
+        line.widthAnchor.constraint(equalToConstant: 1).isActive = true
+        line.heightAnchor.constraint(equalTo: superView.heightAnchor, multiplier: 0.8).isActive = true
+        line.centerYAnchor.constraint(equalTo: superView.centerYAnchor).isActive = true
+        line.centerXAnchor.constraint(equalTo: superView.centerXAnchor, constant: 10).isActive = true
+    }
+    
+    private func setInnerSaleViewAnchors(iconPrice: UIImageView, saleLabel: UILabel, saleSize: UILabel, lineView: UIView, starIcon: UIImageView, starsCount: UILabel, superView: UIView) {
+        let innerViews = [iconPrice, saleLabel, saleSize, lineView, starIcon, starsCount]
+        for view in innerViews {
+            view.translatesAutoresizingMaskIntoConstraints = false
+            view.centerYAnchor.constraint(equalTo: superView.centerYAnchor).isActive = true
+        }
+        
+        iconPrice.heightAnchor.constraint(equalTo: saleLabel.heightAnchor).isActive = true
+        iconPrice.widthAnchor.constraint(equalTo: iconPrice.heightAnchor).isActive = true
+        
+        saleLabel.heightAnchor.constraint(equalTo: saleSize.heightAnchor).isActive = true
+        saleSize.heightAnchor.constraint(equalTo: lineView.heightAnchor).isActive = true
+        lineView.heightAnchor.constraint(equalTo: starIcon.heightAnchor).isActive = true
+        starIcon.heightAnchor.constraint(equalTo: saleLabel.heightAnchor).isActive = true
+        starIcon.widthAnchor.constraint(equalTo: starIcon.heightAnchor).isActive = true
+        starsCount.heightAnchor.constraint(equalTo: superView.heightAnchor).isActive = true
+        
+        iconPrice.leftAnchor.constraint(equalTo: superView.leftAnchor).isActive = true
+        saleLabel.leftAnchor.constraint(equalTo: iconPrice.rightAnchor).isActive = true
+        saleSize.leftAnchor.constraint(equalTo: saleLabel.rightAnchor).isActive = true
+        lineView.leftAnchor.constraint(equalTo: saleSize.rightAnchor).isActive = true
+        starIcon.leftAnchor.constraint(equalTo: lineView.rightAnchor).isActive = true
+        starsCount.leftAnchor.constraint(equalTo: starIcon.rightAnchor).isActive = true
+        starsCount.rightAnchor.constraint(equalTo: superView.rightAnchor).isActive = true
+        
     }
 }
