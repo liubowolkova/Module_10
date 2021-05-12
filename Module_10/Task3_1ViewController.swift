@@ -8,8 +8,12 @@
 import UIKit
 import MapKit
 
+enum LabelsTypes {
+    case title, subtitle, p, span, sale, nums
+}
+
 class ImageSlider {
-    public var view = UIStackView()
+    public lazy var view = UIStackView()
     
     init(count: UInt) {
         let slides = self.create(count)
@@ -54,6 +58,59 @@ class ImageSlider {
             view.widthAnchor.constraint(equalToConstant: 90).isActive = true
             view.heightAnchor.constraint(equalToConstant: 10).isActive = true
         } else { print("Warning! ImageSlider needs superview!") }
+    }
+}
+
+class CustomLabel {
+    public lazy var label = UILabel()
+    
+    init(type: LabelsTypes, text: String) {
+        self.create(type, text)
+    }
+    
+    private func create(_ type: LabelsTypes, _ text: String) {
+        self.label.text = text
+        var fontName: String
+        var fontSize: CGFloat
+        var color: UIColor
+        var aligment: NSTextAlignment
+        
+        switch type {
+        case .title:
+            fontName = "Thonburi-Bold"
+            fontSize = 26
+            color = .black
+            aligment = .center
+        case .subtitle:
+            fontName = "HelveticaNeue"
+            fontSize = 20
+            color = .gray
+            aligment = .center
+        case .p:
+            fontName = "HelveticaNeue"
+            fontSize = 18
+            color = .black
+            aligment = .left
+        case .span:
+            fontName = "HelveticaNeue"
+            fontSize = 16
+            color = .lightGray
+            aligment = .center
+        case .sale:
+            fontName = "HelveticaNeue"
+            fontSize = 19
+            color = .black
+            aligment = .left
+        case .nums:
+            fontName = "Thonburi-Bold"
+            fontSize = 22
+            color = .black
+            aligment = .left
+        }
+        
+        self.label.font = UIFont(name: fontName, size: fontSize)
+        self.label.textColor = color
+        self.label.textAlignment = aligment
     }
 }
 
