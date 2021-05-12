@@ -12,6 +12,16 @@ enum LabelsTypes {
     case title, subtitle, p, span, sale, nums
 }
 
+enum LabelsText: String {
+    case title = "Fantastic gradient"
+    case subtitle = "Some images"
+    case p = "What do you need for making interesting gradient? All you need is Figma and Imagination!"
+    case span = "Creating gradient is free. You can pay 1$ if you really want waste some money"
+    case sale = "Sale"
+    case numsSale = "20%"
+    case numsStars = "5.0"
+}
+
 class ImageSlider {
     public lazy var view = UIStackView()
     
@@ -64,12 +74,12 @@ class ImageSlider {
 class CustomLabel {
     public lazy var label = UILabel()
     
-    init(type: LabelsTypes, text: String) {
+    init(type: LabelsTypes, text: LabelsText) {
         self.create(type, text)
     }
     
-    private func create(_ type: LabelsTypes, _ text: String) {
-        self.label.text = text
+    private func create(_ type: LabelsTypes, _ text: LabelsText) {
+        self.label.text = text.rawValue
         var fontName: String
         var fontSize: CGFloat
         var color: UIColor
@@ -150,6 +160,13 @@ class Task3_1ViewController: UIViewController {
     private let image = UIImage(named: "Pic_1.png")
     private let imageContainer = UIImageView()
     private let imageSlider = ImageSlider(count: 5)
+    private let titleLabel = CustomLabel(type: .title, text: .title).label
+    private let subtitleLabel = CustomLabel(type: .subtitle, text: .subtitle).label
+    private let pLabel = CustomLabel(type: .p, text: .p).label
+    private let spanLabel = CustomLabel(type: .span, text: .span).label
+    private let sale = CustomLabel(type: .sale, text: .sale).label
+    private let numSale = CustomLabel(type: .nums, text: .numsSale).label
+    private let numStars = CustomLabel(type: .nums, text: .numsStars).label
 
     override func viewDidLoad() {
         super.viewDidLoad()
