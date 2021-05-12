@@ -13,7 +13,7 @@ enum LabelsTypes {
 }
 
 enum LabelsText: String {
-    case title = "Fantastic gradient"
+    case title = "Fantastic Gradient"
     case subtitle = "Some images"
     case p = "What do you need for making interesting gradient? All you need is Figma and Imagination!"
     case span = "Creating gradient is free. You can pay 1$ if you really want waste some money"
@@ -64,7 +64,7 @@ class ImageSlider {
         if view.superview != nil {
             view.translatesAutoresizingMaskIntoConstraints = false
             view.centerXAnchor.constraint(equalTo: view.superview!.centerXAnchor).isActive = true
-            view.bottomAnchor.constraint(equalTo: view.superview!.bottomAnchor, constant: -20).isActive = true
+            view.bottomAnchor.constraint(equalTo: view.superview!.bottomAnchor, constant: -25).isActive = true
             view.widthAnchor.constraint(equalToConstant: 90).isActive = true
             view.heightAnchor.constraint(equalToConstant: 10).isActive = true
         } else { print("Warning! ImageSlider needs superview!") }
@@ -145,6 +145,31 @@ extension UIView {
         } else { print("Warning! ImageContainer needs superview!") }
     }
     
+    public func bindInfoContainer(topView: UIView) {
+        let view = self
+        if view.superview != nil {
+            view.translatesAutoresizingMaskIntoConstraints = false
+            view.topAnchor.constraint(equalTo: topView.bottomAnchor, constant: -10).isActive = true
+            self.bindLeftRight(view)
+            self.bindBottom(view)
+        } else { print("Warning! InfoContainer needs superview!") }
+    }
+    
+    public func bindInformation(topView: UIView?) {
+        let view = self
+        if view.superview != nil {
+            view.translatesAutoresizingMaskIntoConstraints = false
+            if topView != nil {
+                view.topAnchor.constraint(equalTo: topView!.bottomAnchor, constant: 20).isActive = true
+            } else {
+                view.topAnchor.constraint(equalTo: view.superview!.topAnchor, constant: 20).isActive = true
+            }
+            view.leftAnchor.constraint(equalTo: view.superview!.leftAnchor, constant: 30).isActive = true
+            view.rightAnchor.constraint(equalTo: view.superview!.rightAnchor, constant: -30).isActive = true
+            
+        } else { print("Warning! Content needs superview!") }
+    }
+    
     private func bindLeftRight(_ view: UIView) {
         view.rightAnchor.constraint(equalTo: view.superview!.rightAnchor).isActive = true
         view.leftAnchor.constraint(equalTo: view.superview!.leftAnchor).isActive = true
@@ -153,13 +178,21 @@ extension UIView {
     private func bindTop(_ view: UIView) {
         view.topAnchor.constraint(equalTo: view.superview!.topAnchor).isActive = true
     }
+    
+    private func bindBottom(_ view: UIView) {
+        view.bottomAnchor.constraint(equalTo: view.superview!.bottomAnchor).isActive = true
+    }
 }
 
 class Task3_1ViewController: UIViewController {
+    // Containers
     private let mainContainer = UIScrollView()
     private let image = UIImage(named: "Pic_1.png")
     private let imageContainer = UIImageView()
     private let imageSlider = ImageSlider(count: 5)
+    private let infoContainer = UIView()
+    
+    // Labels
     private let titleLabel = CustomLabel(type: .title, text: .title).label
     private let subtitleLabel = CustomLabel(type: .subtitle, text: .subtitle).label
     private let pLabel = CustomLabel(type: .p, text: .p).label
@@ -180,6 +213,17 @@ class Task3_1ViewController: UIViewController {
         imageSlider.setAnchors()
         view.addSubview(imageContainer)
         imageContainer.bindImageContainer()
+        
+        infoContainer.layer.cornerRadius = 10
+        infoContainer.backgroundColor = .white
+        view.addSubview(infoContainer)
+        infoContainer.bindInfoContainer(topView: imageContainer)
+        
+        infoContainer.addSubview(titleLabel)
+        titleLabel.bindInformation(topView: nil)
+        infoContainer.addSubview(subtitleLabel)
+        subtitleLabel.bindInformation(topView: titleLabel)
+        
         
         mainContainer.contentSize = view.frame.size
     }
