@@ -22,6 +22,11 @@ enum LabelsText: String {
     case numsStars = "5.0"
 }
 
+enum SaleIcons: String {
+    case price = "dollarsign.square"
+    case star = "star.fill"
+}
+
 class ImageSlider {
     public lazy var view = UIStackView()
     
@@ -124,6 +129,105 @@ class CustomLabel {
     }
 }
 
+class SaleContainer {
+    public var view = UIView()
+
+    
+    init(saleSizeText: LabelsText, starsCountText: LabelsText) {
+        self.create(saleSizeText, starsCountText)
+    }
+    
+    private func createIcon(type: SaleIcons, color: UIColor) -> UIImageView {
+        let icon = UIImage(systemName: type.rawValue)
+        let iconContainer = UIImageView()
+        iconContainer.image = icon
+        iconContainer.tintColor = color
+        
+        return iconContainer
+    }
+    
+    private func create(_ saleSizeText: LabelsText, _ starsCountText: LabelsText) {
+        // Fixed views
+        let priceIcon = self.createIcon(type: .price, color: .green)
+        let starIcon = self.createIcon(type: .star, color: .yellow)
+        let saleLabel = CustomLabel(type: .sale, text: .sale).label
+        let centerView = UIView()
+        
+        // Setted views
+        let saleSizeLabel = CustomLabel(type: .nums, text: saleSizeText).label
+        let starsCountLabel = CustomLabel(type: .nums, text: starsCountText).label
+        
+        let icons = [
+            "price": priceIcon,
+            "star": starIcon
+        ]
+        let labels = [
+            "sale": saleLabel,
+            "saleSize": saleSizeLabel,
+            "starsCount": starsCountLabel
+        ]
+        self.compose(icons, labels, centerView)
+    }
+    
+    private func compose(_ icons: [String:UIImageView], _ labels: [String:UILabel], _ centerView: UIView) {
+        let view = self.view
+        view.addSubview(icons["price"]!)
+        view.addSubview(labels["sale"]!)
+        view.addSubview(labels["saleSize"]!)
+        view.addSubview(centerView)
+        view.addSubview(icons["star"]!)
+        view.addSubview(labels["starsCount"]!)
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        icons["price"]!.translatesAutoresizingMaskIntoConstraints = false
+        labels["sale"]!.translatesAutoresizingMaskIntoConstraints = false
+        labels["saleSize"]!.translatesAutoresizingMaskIntoConstraints = false
+        centerView.translatesAutoresizingMaskIntoConstraints = false
+        icons["star"]!.translatesAutoresizingMaskIntoConstraints = false
+        labels["starsCount"]!.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.setIconSize(icon: icons["price"]!)
+        self.setIconSize(icon: icons["star"]!)
+        
+        self.bindLeft(icons["price"]!, leftView: nil)
+        self.bindBottom(icons["price"]!)
+        
+        self.bindLeft(labels["sale"]!, leftView: icons["price"]!)
+        self.bindBottom(labels["sale"]!)
+        
+        self.bindLeft(labels["saleSize"]!, leftView: labels["sale"]!)
+        self.bindBottom(labels["saleSize"]!)
+        
+        self.bindLeft(centerView, leftView: labels["saleSize"]!)
+        self.bindBottom(centerView)
+        
+        centerView.topAnchor.constraint(equalTo: centerView.superview!.topAnchor).isActive = true
+        self.bindLeft(icons["star"]!, leftView: centerView)
+        self.bindBottom(icons["star"]!)
+        
+        self.bindLeft(labels["starsCount"]!, leftView: icons["star"]!)
+        self.bindBottom(labels["starsCount"]!)
+        labels["starsCount"]!.rightAnchor.constraint(equalTo: labels["starsCount"]!.superview!.rightAnchor).isActive = true
+    }
+    
+    private func bindLeft(_ view: UIView, leftView: UIView?) {
+        if leftView != nil {
+            view.leftAnchor.constraint(equalTo: leftView!.rightAnchor).isActive = true
+        } else {
+            view.leftAnchor.constraint(equalTo: view.superview!.leftAnchor).isActive = true
+        }
+    }
+    
+    private func bindBottom(_ view: UIView) {
+        view.bottomAnchor.constraint(equalTo: view.superview!.bottomAnchor).isActive = true
+    }
+    
+    private func setIconSize(icon: UIImageView) {
+        icon.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        icon.heightAnchor.constraint(equalToConstant: 30).isActive = true
+    }
+}
+
 extension UIView {
     public func bindMainContainer() {
         let view = self
@@ -197,9 +301,10 @@ class Task3_1ViewController: UIViewController {
     private let subtitleLabel = CustomLabel(type: .subtitle, text: .subtitle).label
     private let pLabel = CustomLabel(type: .p, text: .p).label
     private let spanLabel = CustomLabel(type: .span, text: .span).label
-    private let sale = CustomLabel(type: .sale, text: .sale).label
-    private let numSale = CustomLabel(type: .nums, text: .numsSale).label
-    private let numStars = CustomLabel(type: .nums, text: .numsStars).label
+//    private let sale = CustomLabel(type: .sale, text: .sale).label
+//    private let numSale = CustomLabel(type: .nums, text: .numsSale).label
+//    private let numStars = CustomLabel(type: .nums, text: .numsStars).label
+    private let saleContainer = SaleContainer(saleSizeText: .numsSale, starsCountText: .numsStars).view
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -224,6 +329,11 @@ class Task3_1ViewController: UIViewController {
         infoContainer.addSubview(subtitleLabel)
         subtitleLabel.bindInformation(topView: titleLabel)
         
+        infoContainer.addSubview(saleContainer)
+        saleContainer.translatesAutoresizingMaskIntoConstraints = false
+        saleContainer.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        saleContainer.backgroundColor = .blue
+        saleContainer.bindInformation(topView: subtitleLabel)
         
         mainContainer.contentSize = view.frame.size
     }
