@@ -208,11 +208,15 @@ class SaleContainer {
         self.bindLeft(labels["starsCount"]!, leftView: icons["star"]!)
         self.bindBottom(labels["starsCount"]!)
         labels["starsCount"]!.rightAnchor.constraint(equalTo: labels["starsCount"]!.superview!.rightAnchor).isActive = true
+        
+        let verticalLineView = self.createVerticalLine()
+        centerView.addSubview(verticalLineView)
+        setVerticalLineAnchors(verticalLineView)
     }
     
     private func bindLeft(_ view: UIView, leftView: UIView?) {
         if leftView != nil {
-            view.leftAnchor.constraint(equalTo: leftView!.rightAnchor).isActive = true
+            view.leftAnchor.constraint(equalTo: leftView!.rightAnchor, constant: 5).isActive = true
         } else {
             view.leftAnchor.constraint(equalTo: view.superview!.leftAnchor).isActive = true
         }
@@ -225,6 +229,23 @@ class SaleContainer {
     private func setIconSize(icon: UIImageView) {
         icon.widthAnchor.constraint(equalToConstant: 30).isActive = true
         icon.heightAnchor.constraint(equalToConstant: 30).isActive = true
+    }
+    
+    private func createVerticalLine() -> UIView{
+        let lineView = UIView()
+        lineView.backgroundColor = .lightGray
+        
+        return lineView
+    }
+    
+    private func setVerticalLineAnchors(_ view: UIView) {
+        view.translatesAutoresizingMaskIntoConstraints = false
+        if view.superview != nil {
+            view.widthAnchor.constraint(equalToConstant: 1).isActive = true
+            view.heightAnchor.constraint(equalTo: view.superview!.heightAnchor, multiplier: 0.8).isActive = true
+            view.centerXAnchor.constraint(equalTo: view.superview!.centerXAnchor, constant: 10).isActive = true
+            self.bindBottom(view)
+        } else { print("Warning! VerticalLineView needs superview!") }
     }
 }
 
@@ -295,16 +316,13 @@ class Task3_1ViewController: UIViewController {
     private let imageContainer = UIImageView()
     private let imageSlider = ImageSlider(count: 5)
     private let infoContainer = UIView()
+    private let saleContainer = SaleContainer(saleSizeText: .numsSale, starsCountText: .numsStars).view
     
     // Labels
     private let titleLabel = CustomLabel(type: .title, text: .title).label
     private let subtitleLabel = CustomLabel(type: .subtitle, text: .subtitle).label
     private let pLabel = CustomLabel(type: .p, text: .p).label
     private let spanLabel = CustomLabel(type: .span, text: .span).label
-//    private let sale = CustomLabel(type: .sale, text: .sale).label
-//    private let numSale = CustomLabel(type: .nums, text: .numsSale).label
-//    private let numStars = CustomLabel(type: .nums, text: .numsStars).label
-    private let saleContainer = SaleContainer(saleSizeText: .numsSale, starsCountText: .numsStars).view
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -332,7 +350,6 @@ class Task3_1ViewController: UIViewController {
         infoContainer.addSubview(saleContainer)
         saleContainer.translatesAutoresizingMaskIntoConstraints = false
         saleContainer.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        saleContainer.backgroundColor = .blue
         saleContainer.bindInformation(topView: subtitleLabel)
         
         mainContainer.contentSize = view.frame.size
