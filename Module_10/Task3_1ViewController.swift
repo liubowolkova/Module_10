@@ -27,6 +27,16 @@ enum SaleIcons: String {
     case star = "star.fill"
 }
 
+enum ButtonsTypes {
+    case fillLSize, borderedMSizeShort, borderedMSizeLong
+}
+
+enum ButtonsTitles: String {
+    case menu = "Menu"
+    case make = "Make gradient"
+    case get = "Get uniq gradient"
+}
+
 class ImageSlider {
     public lazy var view = UIStackView()
     
@@ -85,6 +95,7 @@ class CustomLabel {
     
     private func create(_ type: LabelsTypes, _ text: LabelsText) {
         self.label.text = text.rawValue
+        self.label.numberOfLines = 0
         var fontName: String
         var fontSize: CGFloat
         var color: UIColor
@@ -249,6 +260,43 @@ class SaleContainer {
     }
 }
 
+class CustomButton {
+    public var button = UIButton()
+    
+    init(type: ButtonsTypes, title: ButtonsTitles) {
+        
+        self.create(type, title)
+        self.setHeightAnchor(type)
+    }
+    
+    private func create(_ type: ButtonsTypes, _ title: ButtonsTitles) {
+        let button = self.button
+        button.layer.borderWidth = 2
+        button.layer.borderColor = CGColor(red: 0, green: 0, blue: 1, alpha: 1)
+        button.layer.cornerRadius = 10
+        button.setTitle(title.rawValue, for: .normal)
+        
+        switch type {
+        case .fillLSize:
+            button.backgroundColor = .blue
+            button.setTitleColor(.white, for: .normal)
+        default:
+            button.backgroundColor = .none
+            button.setTitleColor(.blue, for: .normal)
+        }
+    }
+    
+    private func setHeightAnchor(_ type: ButtonsTypes) {
+        let button = self.button
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        let height: CGFloat = type == .fillLSize ? 70 : 60
+        button.heightAnchor.constraint(equalToConstant: height).isActive = true
+    }
+}
+
+
+
 extension UIView {
     public func bindMainContainer() {
         let view = self
@@ -295,6 +343,20 @@ extension UIView {
         } else { print("Warning! Content needs superview!") }
     }
     
+    public func bindInformationButton(isShort: Bool, topView: UIView) {
+        let view = self
+        if isShort {
+            if view.superview != nil {
+                view.translatesAutoresizingMaskIntoConstraints = false
+                view.topAnchor.constraint(equalTo: topView.bottomAnchor, constant: 20).isActive = true
+                view.leftAnchor.constraint(equalTo: view.superview!.leftAnchor, constant: 45).isActive = true
+                view.rightAnchor.constraint(equalTo: view.superview!.rightAnchor, constant: -45).isActive = true
+            } else { print("Warning! Button needs superview!") }
+        } else {
+            self.bindInformation(topView: topView)
+        }
+    }
+    
     private func bindLeftRight(_ view: UIView) {
         view.rightAnchor.constraint(equalTo: view.superview!.rightAnchor).isActive = true
         view.leftAnchor.constraint(equalTo: view.superview!.leftAnchor).isActive = true
@@ -323,35 +385,54 @@ class Task3_1ViewController: UIViewController {
     private let subtitleLabel = CustomLabel(type: .subtitle, text: .subtitle).label
     private let pLabel = CustomLabel(type: .p, text: .p).label
     private let spanLabel = CustomLabel(type: .span, text: .span).label
+    
+    // Buttons
+    private let menuButton = CustomButton(type: .borderedMSizeShort, title: .menu).button
+    private let makeButton = CustomButton(type: .fillLSize, title: .make).button
+    private let getButton = CustomButton(type: .borderedMSizeLong, title: .get)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         let view = self.view!
         
+        // Main container
         view.addSubview(mainContainer)
         mainContainer.bindMainContainer()
         
+        // Image container
         imageContainer.image = image
         imageContainer.addSubview(imageSlider.view)
         imageSlider.setAnchors()
         view.addSubview(imageContainer)
         imageContainer.bindImageContainer()
         
+        // Info container
         infoContainer.layer.cornerRadius = 10
         infoContainer.backgroundColor = .white
         view.addSubview(infoContainer)
         infoContainer.bindInfoContainer(topView: imageContainer)
         
+        // Title and subtitle
         infoContainer.addSubview(titleLabel)
         titleLabel.bindInformation(topView: nil)
         infoContainer.addSubview(subtitleLabel)
         subtitleLabel.bindInformation(topView: titleLabel)
         
+        // Sale container
         infoContainer.addSubview(saleContainer)
         saleContainer.translatesAutoresizingMaskIntoConstraints = false
         saleContainer.heightAnchor.constraint(equalToConstant: 60).isActive = true
         saleContainer.bindInformation(topView: subtitleLabel)
         
-        mainContainer.contentSize = view.frame.size
+        // P
+        infoContainer.addSubview(pLabel)
+        pLabel.bindInformation(topView: saleContainer)
+        
+        // Menu button
+        infoContainer.addSubview(menuButton)
+        menuButton.bindInformationButton(isShort: true, topView: pLabel)
+        
+        //mainContainer.contentSize = view.frame.size
+        mainContainer.contentSize = CGSize(width: view.frame.size.width, height: CGFloat(1500))
     }
 }
