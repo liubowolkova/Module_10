@@ -295,7 +295,38 @@ class CustomButton {
     }
 }
 
-
+class CustomMap {
+    public let map = MKMapView()
+    
+    init() {
+        self.addSettings()
+    }
+    
+    private func addSettings() {
+        let map = self.map
+        map.mapType = .standard
+        map.isZoomEnabled = false
+        map.isScrollEnabled = false
+        map.layer.cornerRadius = 10
+        map.layer.masksToBounds = true
+        
+        let location = CLLocation(latitude: 55.751244, longitude: 37.618423)
+        let regionRadius: CLLocationDistance = 1000
+        let coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+        map.setRegion(coordinateRegion, animated: true)
+    }
+    
+    public func setAnchors(topView: UIView) {
+        let map = self.map
+        if map.superview != nil {
+            map.translatesAutoresizingMaskIntoConstraints = false
+            map.topAnchor.constraint(equalTo: topView.bottomAnchor, constant: 20).isActive = true
+            map.leftAnchor.constraint(equalTo: map.superview!.leftAnchor, constant: 30).isActive = true
+            map.rightAnchor.constraint(equalTo: map.superview!.rightAnchor, constant: -30).isActive = true
+            map.heightAnchor.constraint(equalTo: map.widthAnchor, multiplier: 0.625).isActive = true
+        } else { print("Warning! Map needs superview!") }
+    }
+}
 
 extension UIView {
     public func bindMainContainer() {
@@ -389,7 +420,10 @@ class Task3_1ViewController: UIViewController {
     // Buttons
     private let menuButton = CustomButton(type: .borderedMSizeShort, title: .menu).button
     private let makeButton = CustomButton(type: .fillLSize, title: .make).button
-    private let getButton = CustomButton(type: .borderedMSizeLong, title: .get)
+    private let getButton = CustomButton(type: .borderedMSizeLong, title: .get).button
+    
+    // Map
+    private let customMap = CustomMap()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -398,6 +432,7 @@ class Task3_1ViewController: UIViewController {
         // Main container
         view.addSubview(mainContainer)
         mainContainer.bindMainContainer()
+        mainContainer.isScrollEnabled = true
         
         // Image container
         imageContainer.image = image
@@ -432,7 +467,24 @@ class Task3_1ViewController: UIViewController {
         infoContainer.addSubview(menuButton)
         menuButton.bindInformationButton(isShort: true, topView: pLabel)
         
+        // Map
+        let map = customMap.map
+        infoContainer.addSubview(map)
+        customMap.setAnchors(topView: menuButton)
+        
+        // Span label
+        infoContainer.addSubview(spanLabel)
+        spanLabel.bindInformation(topView: map)
+        
+        // Make button
+        infoContainer.addSubview(makeButton)
+        makeButton.bindInformationButton(isShort: false, topView: spanLabel)
+        
+        // Get button
+        infoContainer.addSubview(getButton)
+        getButton.bindInformationButton(isShort: false, topView: makeButton)
+        
         //mainContainer.contentSize = view.frame.size
-        mainContainer.contentSize = CGSize(width: view.frame.size.width, height: CGFloat(1500))
+        mainContainer.contentSize = CGSize(width: view.frame.size.width, height: CGFloat(3000))
     }
 }
