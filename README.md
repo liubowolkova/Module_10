@@ -5,7 +5,7 @@
 It's a simple app for practice to work with tables.
 
 ### Screenshots
-![Screenshots] (./Module_10/Module_10/Assets.xcassets/screenshots.imageset/screenshots.png)
+![Screenshots] (./Module_10/Assets.xcassets/screenshots.imageset/screenshots.png)
 
 There are three tasks
 - Task 1
