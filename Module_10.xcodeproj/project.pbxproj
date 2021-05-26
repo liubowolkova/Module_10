@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		52169CB6265EDCAB00E99B91 /* screenshots.png in Resources */ = {isa = PBXBuildFile; fileRef = 52169CB5265EDCAB00E99B91 /* screenshots.png */; };
 		5235F3E1265BF6EF00C816DD /* Task2_1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5235F3E0265BF6EF00C816DD /* Task2_1ViewController.swift */; };
 		5235F3E7265C028500C816DD /* ItemClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5235F3E6265C028500C816DD /* ItemClass.swift */; };
 		5235F3EA265C036900C816DD /* BasicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5235F3E9265C036900C816DD /* BasicData.swift */; };
@@ -27,7 +26,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		52169CB5265EDCAB00E99B91 /* screenshots.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = screenshots.png; path = ../../../../Desktop/screenshots.png; sourceTree = "<group>"; };
 		5235F3E0265BF6EF00C816DD /* Task2_1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task2_1ViewController.swift; sourceTree = "<group>"; };
 		5235F3E6265C028500C816DD /* ItemClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemClass.swift; sourceTree = "<group>"; };
 		5235F3E9265C036900C816DD /* BasicData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicData.swift; sourceTree = "<group>"; };
@@ -60,14 +58,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		52169CB4265EDC6300E99B91 /* Screenshots */ = {
-			isa = PBXGroup;
-			children = (
-				52169CB5265EDCAB00E99B91 /* screenshots.png */,
-			);
-			path = Screenshots;
-			sourceTree = "<group>";
-		};
 		5235F3E3265BF7AF00C816DD /* Task2_1 */ = {
 			isa = PBXGroup;
 			children = (
@@ -107,7 +97,6 @@
 		52EB8EE8262ACBB6008A2FF6 /* Module_10 */ = {
 			isa = PBXGroup;
 			children = (
-				52169CB4265EDC6300E99B91 /* Screenshots */,
 				52EB8EE9262ACBB6008A2FF6 /* AppDelegate.swift */,
 				52EB8EEB262ACBB6008A2FF6 /* SceneDelegate.swift */,
 				52EB8EED262ACBB6008A2FF6 /* ViewController.swift */,
@@ -186,7 +175,6 @@
 				52EB8EF6262ACBB7008A2FF6 /* LaunchScreen.storyboard in Resources */,
 				52EB8EF3262ACBB7008A2FF6 /* Assets.xcassets in Resources */,
 				52EB8EF1262ACBB6008A2FF6 /* Main.storyboard in Resources */,
-				52169CB6265EDCAB00E99B91 /* screenshots.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
