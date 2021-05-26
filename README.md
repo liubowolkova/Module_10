@@ -5,13 +5,14 @@
 It's a simple app for practice to work with tables.
 
 ### Screenshots
-![Screenshots] (./Module_10/Assets/screenshots.png)
+![Screenshots] (./Module_10/Screenshots/screenshots.png)
 
 There are three tasks
 - Task 1
 - Task 2
 - Task 3
-and two extra tasks
+
+And two extra tasks
 - Task 2_1
 - Task 3_1
 
